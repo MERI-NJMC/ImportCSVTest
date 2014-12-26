@@ -1,7 +1,6 @@
 var options = {
     chart: {
         renderTo: 'container',
-        //defaultSeriesType: 'column',
         defaultSeriesType: 'spline'
     },
     title: {
@@ -17,10 +16,9 @@ var options = {
         }
     },
     series: [{
-
-        name: 'Water Height',
         data: []
     }]
+
 };
 
 $.get('HAWKCSV.csv', function(data) 
@@ -28,13 +26,12 @@ $.get('HAWKCSV.csv', function(data)
     // Split the lines
     var lines = data.split('\n'); // Splits based on the end of the line
     //console.log(lines);
-    // Iterate over the lines and add categories or series
     
-    var Xs = []; //holds the categories
-    //console.log(Xs);
+    var categories = []; //holds the categories
+    //console.log(categories);
 
-    var Ys = []; //holds the values
-    //console.log(Ys);
+    var series = []; //holds the series values 
+
 
     $.each(lines, function(lineNo, line) //indexes each lineNo = 0, line = value associated
     { 
@@ -45,27 +42,29 @@ $.get('HAWKCSV.csv', function(data)
         //console.log('Date/Time(x): ' + items[0]);
         //console.log('Values(y): ' + items[1]);
         
-        Xs.push(items[0]);
-        //console.log('X: ' + Xs);
+        categories.push(items[0]);
+        //console.log('X: ' + categories);
     
-        Ys.push(items[1]);
-        //console.log('Y: ' + Ys);
+        series.push(items[1]);
+        //console.log('Y: ' + series.data);
         //console.log('Values(y): ' + items[1]);
     });
 
 
-    Xs.splice(0,1);  //removes first element
-    Ys.splice(0,1); 
-    Xs.splice(143,1); //removes last undefined element from array
-    Ys.splice(143,1); 
-    
+    categories.splice(0,1);  //removes first element
+    series.splice(0,1); 
+    categories.splice(143,1); //removes last undefined element from array
+    series.splice(143,1); 
+    console.log(categories);
+    console.log(series)
 
-    options.xAxis.categories.push(Xs);
-    options.series.push(Ys);
-    //console.log(Xs);
-    //console.log(Ys);
+    options.xAxis.categories.push(categories);
+    options.series.push(series);
+    ;
 
     // Create the chart
     var chart = new Highcharts.Chart(options);
     //console.log(chart);
 });
+
+
