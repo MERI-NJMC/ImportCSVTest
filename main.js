@@ -15,9 +15,7 @@ var options = {
             text: 'Height'
         }
     },
-    series: [{
-        data: []
-    }]
+    series: []
 
 };
 
@@ -30,7 +28,10 @@ $.get('HAWKCSV.csv', function(data)
     var categories = []; //holds the categories
     //console.log(categories);
 
-    var series = []; //holds the series values 
+    var series = {
+        name: 'Height',
+        data: [] //holds the series values 
+    }; 
 
 
     $.each(lines, function(lineNo, line) //indexes each lineNo = 0, line = value associated
@@ -45,16 +46,16 @@ $.get('HAWKCSV.csv', function(data)
         categories.push(items[0]);
         //console.log('X: ' + categories);
     
-        series.push(items[1]);
+        series.data.push(items[1]);
         //console.log('Y: ' + series.data);
         //console.log('Values(y): ' + items[1]);
     });
 
 
     categories.splice(0,1);  //removes first element
-    series.splice(0,1); 
+    series.data.splice(0,1); 
     categories.splice(143,1); //removes last undefined element from array
-    series.splice(143,1); 
+    series.data.splice(143,1); 
     console.log(categories);
     console.log(series)
 
