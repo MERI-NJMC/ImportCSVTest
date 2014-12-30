@@ -35,6 +35,7 @@ $.get('HAWKCSV.csv', function(data)
     }; 
 
     //document.write('1');
+    //document.write('test');
     
 
     $.each(lines, function(lineNo, line) //indexes each lineNo = 0, line = value associated
